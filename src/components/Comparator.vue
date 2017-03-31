@@ -34,21 +34,25 @@
             <div v-else>
               <img src="../assets/loader.gif" alt="">
             </div>
-
           </div>
         </div>
         <div class="card column">
           <div class="card-header">
             <p class="card-header-title" id="seasonChar">
               Seasons character
-              <ol>
-                <li v-for="char in data">
-                </li>
-              </ol>
             </p>
           </div>
           <div class="card-content">
-            lorem
+            <ol>
+              <li v-for="perso in season">
+                {{perso.player[0]}}
+                <ul>
+                  <li v-for="data in perso.player[0].data">
+                    {{data.id}}
+                  </li>
+                </ul>
+              </li>
+            </ol>
           </div>
         </div>
       </div>
@@ -66,30 +70,49 @@ export default {
   data() {
     return {
       data: '',
-      myPersos: {},
+      myPersos: '',
+      season: ''
     }
   },
-  mounted: function () {
-     this.getMyData();
+  mounted() {
+    this.getMyData(),
+    this.getSeasonHero()
   },
   methods: {
     getMyData: function() {
-        var self = this;
-        var url = 'https://symfony-blizzard.herokuapp.com/api/profile/' + this.$route.query.battleTag;
-        fetch(url).then((response) => {
-            if (response.status !== 200) {
-              console.log('Looks like there was a problem. Status Code: ' +
-                response.status);
-              return;
-            }
-            // Examine the text in the response
-            response.json().then(function(data) {
-              // console.log(data);
-              self.myPersos = JSON.parse(data.data.body.contents);
-              console.log(JSON.parse(data.data.body.contents));
-            });
+      var self = this;
+      console.log(this.$route.query);
+      var url = 'https://symfony-blizzard.herokuapp.com/api/profile/' + this.$route.query.battleTag;
+      fetch(url).then((response) => {
+          if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' +
+              response.status);
+            return;
           }
-        )
+          // Examine the text in the response
+          response.json().then(function(data) {
+            console.log(data);
+            self.myPersos = JSON.parse(data.data.body.contents);
+          });
+        })
+        .catch(function(err) {
+          console.log('Fetch Error :-S', err);
+        });
+    },
+    getSeasonHero: function() {
+      var self = this;
+      var url = 'https://symfony-blizzard.herokuapp.com/api/season/9/leaderboard/achievement-points';
+      fetch(url).then((response) => {
+          if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' +
+              response.status);
+            return;
+          }
+          // Examine the text in the response
+          response.json().then(function(data) {
+            self.season = JSON.parse(data.data.body.contents).row;
+          });
+        })
         .catch(function(err) {
           console.log('Fetch Error :-S', err);
         });
