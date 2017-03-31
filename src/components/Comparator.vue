@@ -56,6 +56,9 @@ export default {
       data: ''
     }
   },
+  mounted() {
+    this.getMyData()
+  },
   methods: {
     getMyData: function() {
         console.log(this.$route.query);return;
