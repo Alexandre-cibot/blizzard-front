@@ -14,7 +14,6 @@
   </div>
 
   <!-- Hero content: will be in the middle -->
-  <button type="button" name="button" v-on:click="getMyData"> FETCH</button>
   <div class="hero-body container">
     <div class="container">
       <div class="columns">
@@ -25,7 +24,17 @@
             </p>
           </div>
           <div class="card-content">
-            lorem
+            <div v-if="myPersos.heroes">
+              <ol>
+                <li v-for="perso in myPersos.heroes">
+                  {{ perso.id + " - " + perso.name + " - " + perso.level}}
+                </li>
+              </ol>
+            </div>
+            <div v-else>
+              <img src="../assets/loader.gif" alt="">
+            </div>
+
           </div>
         </div>
         <div class="card column">
@@ -44,6 +53,9 @@
         </div>
       </div>
     </div>
+    <button type="button" name="button">Compare</button>
+  </div>
+
   </div>
 </section>
 </template>
@@ -53,16 +65,17 @@ export default {
   name: 'api',
   data() {
     return {
-      data: ''
+      data: '',
+      myPersos: {},
     }
   },
-  mounted() {
-    this.getMyData()
+  mounted: function () {
+     this.getMyData();
   },
   methods: {
     getMyData: function() {
-        console.log(this.$route.query);return;
-        var url = 'https://symfony-blizzard.herokuapp.com/api/profile/Unic-21493/hero/90545425';
+        var self = this;
+        var url = 'https://symfony-blizzard.herokuapp.com/api/profile/' + this.$route.query.battleTag;
         fetch(url).then((response) => {
             if (response.status !== 200) {
               console.log('Looks like there was a problem. Status Code: ' +
@@ -72,7 +85,8 @@ export default {
             // Examine the text in the response
             response.json().then(function(data) {
               // console.log(data);
-              console.log(JSON.parse(data.data.contents))
+              self.myPersos = JSON.parse(data.data.body.contents);
+              console.log(JSON.parse(data.data.body.contents));
             });
           }
         )
