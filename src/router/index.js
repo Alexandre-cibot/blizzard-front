@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import Test from '@/components/Test'
 import Login from '@/components/Login'
+import Comparator from '@/components/Comparator'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/comparator',
+      name: 'Comparator',
+      component: Comparator
     }
   ]
 })

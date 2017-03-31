@@ -14,6 +14,7 @@
   </div>
 
   <!-- Hero content: will be in the middle -->
+  <button type="button" name="button" v-on:click="getMyData"> FETCH</button>
   <div class="hero-body container">
     <div class="container">
       <div class="columns">
@@ -29,7 +30,7 @@
         </div>
         <div class="card column">
           <div class="card-header">
-            <p class="card-header-title" id="seasonChar" v-on:click="start">
+            <p class="card-header-title" id="seasonChar">
               Seasons character
               <ol>
                 <li v-for="char in data">
@@ -56,15 +57,25 @@ export default {
     }
   },
   methods: {
-    start: function() {
-      var self = this;
-      var url = 'https://symfony-blizzard.herokuapp.com/profile/Unic-21493/hero/90545425'
-      fetch(url)
-      .then(data => data.json())
-      .then(data => {
-        console.log(data);
-        self.data = data;
-      })
+    getMyData: function() {
+        console.log(this.$route.query);return;
+        var url = 'https://symfony-blizzard.herokuapp.com/api/profile/Unic-21493/hero/90545425';
+        fetch(url).then((response) => {
+            if (response.status !== 200) {
+              console.log('Looks like there was a problem. Status Code: ' +
+                response.status);
+              return;
+            }
+            // Examine the text in the response
+            response.json().then(function(data) {
+              // console.log(data);
+              console.log(JSON.parse(data.data.contents))
+            });
+          }
+        )
+        .catch(function(err) {
+          console.log('Fetch Error :-S', err);
+        });
     }
   }
 }
