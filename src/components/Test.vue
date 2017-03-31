@@ -6,7 +6,7 @@
         <div class="container">
           <div class="nav-left">
             <a class="nav-item">
-              <img src="images/bulma-type-white.png" alt="Logo">
+              <img src="../assets/img/logo.png" alt="Logo">
             </a>
           </div>
           <span class="nav-toggle">
