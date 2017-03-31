@@ -53,8 +53,13 @@
         </div>
       </div>
     </div>
-    <button type="button" name="button">Compare</button>
+      <div class="columns">
+        <div class="block column">
+          <a class="button is-primary">Compare</a>
+        </div>
+      </div>
   </div>
+
 
   </div>
 </section>
