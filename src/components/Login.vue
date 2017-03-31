@@ -10,7 +10,7 @@
               <div class="box">
                 <label class="label">Entre ton battle.net tag</label>
                 <p class="control">
-                  <input class="input" type="text" v-model="battleNetTag" placeholder="jsmith@example.org">
+                  <input class="input" type="text" v-model="battleNetTag" placeholder="jsmith@example.org" v-on:keyup.13="submitForm">
                 </p>
                 <hr>
                 <p class="control">
