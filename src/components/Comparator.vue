@@ -32,7 +32,7 @@
               </ol>
             </div>
             <div v-else>
-              <img src="../assets/loader.gif" alt="">
+              <img src="http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif" alt="">
             </div>
 
           </div>
