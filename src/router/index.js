@@ -27,11 +27,6 @@ export default new Router({
       component: Login
     },
     {
-      path: '/search',
-      name: 'Login',
-      component: Login
-    },
-    {
       path: '/comparator',
       name: 'Comparator',
       component: Comparator
