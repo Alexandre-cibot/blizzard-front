@@ -32,7 +32,7 @@
               </ol>
             </div>
             <div v-else>
-              <img src="../assets/loader.gif" alt="">
+              <img src="http://thinkfuture.com/wp-content/uploads/2013/10/loading_spinner.gif" alt="">
             </div>
           </div>
         </div>
@@ -57,8 +57,13 @@
         </div>
       </div>
     </div>
-    <button type="button" name="button">Compare</button>
+      <div class="columns">
+        <div class="block column">
+          <a class="button is-primary">Compare</a>
+        </div>
+      </div>
   </div>
+
 
   </div>
 </section>
